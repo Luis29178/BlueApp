@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TheBlueApp</string>
+    <string name="selectedgroup">SelectedGroup</string>
+    <string name="colorwheel">ColorWheel</string>
+    <string name="onoff">ONOFF</string>
+    <string name="_0">0</string>
+</resources>
