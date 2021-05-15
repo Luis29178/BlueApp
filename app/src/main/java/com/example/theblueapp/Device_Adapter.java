@@ -25,7 +25,7 @@ public class Device_Adapter extends ArrayAdapter<BluetoothDevice> {
         aViewID = watch_resource;
 
     }
-    // this gets the Bluetooth layout
+    // this gets the Bluetooth layout and sets devices name and address
     public View getView(int position, View viewconv, ViewGroup parent)
     {
         viewconv = aLayoutInflater.inflate(aViewID,null);
