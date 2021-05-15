@@ -164,7 +164,27 @@
         android:layout_marginBottom="425dp"
         app:srcCompat="@android:drawable/ic_lock_power_off" />
 
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/mBlueList"
 
+
+        />
+
+    <ImageButton
+        android:id="@+id/AddBlueDeviceButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/mBlueList"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="32dp"
+        android:rotation="-43"
+        android:src="@android:drawable/btn_dialog" />
 
 
 </RelativeLayout>

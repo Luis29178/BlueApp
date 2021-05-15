@@ -3,6 +3,8 @@ package com.example.theblueapp;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.bluetooth.BluetoothDevice;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Color;
@@ -17,10 +19,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import java.util.ArrayList;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ImageButton mBlueButton;
 
     RelativeLayout mlayout;
 
@@ -35,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private ImageButton OnOffButton;//Power button in the center
 
-    //region 5 Preset Buttons
+    //region 5 Preset Buttons (continue Later)
     private Button mPresetColor1;
     private Button mPresetColor2;
     private Button mPresetColor3;
@@ -44,12 +50,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
 
+
+
+
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mBlueButton = (ImageButton) findViewById(R.id.AddBlueDeviceButton);
+        mBlueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenBluetoothActivity();
+            }
+        });
 
         //region Progress Bar for Opasity
         mOpasitytext = (TextView) findViewById(R.id.TextViewOpasity);
@@ -103,6 +119,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+        //region ColorPreset Buttons
         mPresetColor1 = (Button) findViewById(R.id.ColorPreset1);
         mPresetColor2 = (Button) findViewById(R.id.ColorPreset2);
         mPresetColor3 = (Button) findViewById(R.id.ColorPreset3);
@@ -115,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPresetColor3.setOnClickListener(this);
         mPresetColor4.setOnClickListener(this);
         mPresetColor5.setOnClickListener(this);
+        //endregion
 
 
     }
@@ -146,8 +164,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             _Opasitytext.setVisibility(View.VISIBLE);
         }
     }
+    public void OpenBluetoothActivity()
+    {
+        Intent mopenBlue = new Intent(MainActivity.this, BlueToothActivity.class);
+        startActivity(mopenBlue);
 
-    @Override//this method will be implemented as ButtonDesierd.OnClickListener(this)
+    }
+
+    @Override//this method will be implemented as ButtonDesierd.OnClickListener(this) needs to be revied on what color v.getSolidColor() pulls
     public void onClick(View v) {
         SelectedColor = v.getSolidColor();
         mlayout.setBackgroundColor(SelectedColor);
