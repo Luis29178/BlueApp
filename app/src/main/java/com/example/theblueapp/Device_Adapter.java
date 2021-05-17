@@ -31,22 +31,24 @@ public class Device_Adapter extends ArrayAdapter<BluetoothDevice> {
         viewconv = aLayoutInflater.inflate(aViewID,null);
 
         BluetoothDevice device = aDevicesL.get(position);
-
+        //checks for a device
         if (device != null)
         {
             TextView DeviceN = (TextView) viewconv.findViewById(R.id.DeviceName);
             TextView DeviceA = (TextView) viewconv.findViewById(R.id.DeviceAdress);
-
+            //checks if the device has a name for the diplay list
             if (DeviceN != null)
             {
                 DeviceN.setText(device.getName());
             }
+            //checks for an adress and then copys it to the displayed list
             if (DeviceA != null)
             {
                 DeviceA.setText(device.getAddress());
             }
 
         }
+        //returns the layout
         return viewconv;
     }
 }

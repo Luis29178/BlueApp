@@ -81,16 +81,12 @@
         android:id="@+id/ColorWheelOpen"
         android:layout_width="212dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="167dp"
-        android:layout_marginLeft="167dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="588dp"
+        android:layout_below="@+id/ColorPreset3"
+        android:layout_marginStart="-225dp"
+        android:layout_marginLeft="-225dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
         android:text="@string/colorwheel" />
 
     <Button
