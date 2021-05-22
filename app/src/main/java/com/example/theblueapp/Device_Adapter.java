@@ -46,6 +46,7 @@ public class Device_Adapter extends ArrayAdapter<BluetoothDevice> {
             {
                 DeviceA.setText(device.getAddress());
             }
+            aDevicesL.set(position,device);
 
         }
         //returns the layout
