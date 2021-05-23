@@ -54,6 +54,15 @@ public class BTConnectionService {
                 Connected(sSocket,sDevice);
             }
         }
+        public void cancel()
+        {
+            try {
+                sServerSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        }
 
 
 
