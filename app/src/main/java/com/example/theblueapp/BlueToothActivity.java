@@ -173,8 +173,8 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         }
         Log.d(TAG,dName+" Paired");
         Intent bIntent = new Intent(BlueToothActivity.this,MainActivity.class);
-        bIntent.putExtra("ADDED_DEVICE_NAME", dName );
-        bIntent.putExtra("ADDED_DEVICE_ADDRESS",dAddress);
+        BluetoothDevice bExtra = bDeviceList.get(position);
+        bIntent.putExtra("ADDED_DEVICE_NAME", bExtra );
         startActivity(bIntent);
 
 
