@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 
+import java.util.ArrayList;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button ColorWbutton;// Button that will call color wheel
     private int SelectedColor;
+
+    private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
 
 
     private ImageButton OnOffButton;//Power button in the center
@@ -56,8 +60,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        super.onCreate(savedInstanceState);
+
+        BluetoothDevice tempDevice = getIntent().getExtras().getParcelable("ADDED_DEVICE");
+
+        mDeviceList.add(tempDevice);
+
+
+
 
         mBlueButton = (ImageButton) findViewById(R.id.AddBlueDeviceButton);
         mBlueButton.setOnClickListener(new View.OnClickListener() {
@@ -173,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override//this method will be implemented as ButtonDesierd.OnClickListener(this) needs to be revied on what color v.getSolidColor() pulls
     public void onClick(View v) {
-        SelectedColor = v.getSolidColor();
-        mlayout.setBackgroundColor(SelectedColor);
+        int x = v.getDrawingCacheBackgroundColor();
+
     }
 }
