@@ -79,6 +79,22 @@ public class BTConnectionService {
 
 
     }
+
+    private void connected(BluetoothSocket sSocket, BluetoothDevice sDevice)
+    {
+        sConnectedThread = new ConnectedThread(sSocket);
+        sConnectThread.start();
+
+
+    }
+    public  void  write(byte[] out)
+    {
+        ConnectedThread temp;
+        sConnectedThread.write(out);
+    }
+
+
+
     private class ConnectThread extends Thread
     {
         private BluetoothSocket scSocket;
