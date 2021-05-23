@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button ColorWbutton;// Button that will call color wheel
     private int SelectedColor;
 
-    private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
+
 
 
     private ImageButton OnOffButton;//Power button in the center
@@ -63,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         super.onCreate(savedInstanceState);
 
-        BluetoothDevice tempDevice = getIntent().getExtras().getParcelable("ADDED_DEVICE");
 
-        mDeviceList.add(tempDevice);
 
 
 
@@ -184,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override//this method will be implemented as ButtonDesierd.OnClickListener(this) needs to be revied on what color v.getSolidColor() pulls
     public void onClick(View v) {
-        int x = v.getDrawingCacheBackgroundColor();
+        int x = 0;
 
     }
 }
