@@ -164,6 +164,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         Log.d(TAG,"Device Selected");
 
         String dName = bDeviceList.get(position).getName();
+        String dAddress = bDeviceList.get(position).getAddress();
         //this check is to make suer its obove API is 19 or > as its required for creatBond to work
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2);
         {
@@ -172,8 +173,8 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         }
         Log.d(TAG,dName+" Paired");
         Intent bIntent = new Intent(BlueToothActivity.this,MainActivity.class);
-        BluetoothDevice bPassDevice = bDeviceList.get(position);
-        bIntent.putExtra("ADDED_DEVICE", bPassDevice );
+        bIntent.putExtra("ADDED_DEVICE_NAME", dName );
+        bIntent.putExtra("ADDED_DEVICE_ADDRESS",dAddress);
         startActivity(bIntent);
 
 
