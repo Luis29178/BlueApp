@@ -146,7 +146,6 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="204dp"
         android:layout_marginRight="204dp"
-        android:background="#FF0000"
         app:backgroundTint="#FF0000" />
 
     <ImageButton
