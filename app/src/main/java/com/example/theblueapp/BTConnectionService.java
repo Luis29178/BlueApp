@@ -146,4 +146,11 @@ public class BTConnectionService {
 
     }
 
+    public void startClient(BluetoothDevice _device, UUID _UUID)
+    {
+        sProgressDialog = sProgressDialog.show(sContext,"Connecting","Please Wait", true);
+        sConnectThread = new ConnectThread(_device,_UUID);
+        sConnectThread.start();
+    }
+
 }
