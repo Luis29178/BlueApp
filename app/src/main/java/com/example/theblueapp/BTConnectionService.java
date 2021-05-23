@@ -59,7 +59,7 @@ public class BTConnectionService {
             }
             if (sSocket != null)
             {
-                Connected(sSocket,sDevice);
+                connected(sSocket,sDevice);
             }
         }
         public void cancel()
