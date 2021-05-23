@@ -136,7 +136,6 @@
         android:layout_marginRight="20dp"
         app:backgroundTint="#FFEB3B" />
 
-
     <Button
         android:id="@+id/ColorPreset1"
         android:layout_width="30dp"
@@ -144,9 +143,10 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="203dp"
-        android:layout_marginRight="203dp"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="204dp"
+        android:layout_marginRight="204dp"
+        android:background="#FF0000"
         app:backgroundTint="#FF0000" />
 
     <ImageButton

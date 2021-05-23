@@ -103,7 +103,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_discov_layout);
         NewDevices = (ListView) findViewById(R.id.BlueNewDevices);
-
+        bDeviceList = new ArrayList<>();
         bBlueAdapter = BluetoothAdapter.getDefaultAdapter();
         IntentFilter pBondFilter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(pBrodcastReciverBond, pBondFilter);
