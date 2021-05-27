@@ -32,7 +32,7 @@ public class BTConnectionService {
     {
         sContext = context;
         sBlueAdapter = BluetoothAdapter.getDefaultAdapter();
-        start();
+
     }
     private class AcceptThread extends Thread
     {
@@ -89,8 +89,9 @@ public class BTConnectionService {
     }
     public  void  write(byte[] out)
     {
-        ConnectedThread tmp;
 
+
+        start();
         sConnectedThread.write(out);
     }
 
@@ -202,6 +203,8 @@ public class BTConnectionService {
             {
                 try {
                     bytes = _InStream.read(buffer);
+                    String Message = new String(buffer,0,bytes);
+                    Log.e(TAG,"Incoming Message: " + Message);
 
                 } catch (IOException ioException) {
                 Log.d(TAG,"Failed INStream read");

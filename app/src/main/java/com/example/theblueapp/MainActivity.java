@@ -26,6 +26,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private  final String TAG = "MainActivity" ;
     private ImageButton mBlueButton;
+
 
     RelativeLayout mlayout;
 
@@ -65,8 +67,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
 
     private BluetoothDevice mSelectedDevice;
-    private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");
-    private BTConnectionService mConectionservice;
+    private static final UUID MY_UUID_INSECURE = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private BTConnectionService mConectionservice = new BTConnectionService(this);
 
 
     int[] RGBval = new int[3];
@@ -78,9 +80,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if(mConectionservice ==null) {
-            mConectionservice = new BTConnectionService(this);
-        }
+
+
+
 
         try
         {
@@ -220,10 +222,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 SelectedColor = color;
                 RGBconvertMethod(SelectedColor);
                 ByteBuffer Buffer = ByteBuffer.allocate(4);
-                Buffer.putInt(color);
+                Buffer.putInt(1);
                 byte[] bytes = Buffer.array();
-                startBTServices();
-                mConectionservice.write(bytes);
+                BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
+                BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
+                BluetoothSocket mSocket = null;
+                int counter = 0;
+                do {
+                    try {
+                        mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
+                        mSocket.connect();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                }while (!mSocket.isConnected());
+
+                try {
+                    OutputStream OutPut =mSocket.getOutputStream();
+                    OutPut.write(bytes);
+
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                try {
+                    mSocket.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+
+
+                //mConectionservice.write(bytes);
 
             }
         });
