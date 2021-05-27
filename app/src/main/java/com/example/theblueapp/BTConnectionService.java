@@ -16,7 +16,7 @@ import java.util.UUID;
 public class BTConnectionService {
     private static final String TAG ="BTCS";
 
-    private static final UUID MY_UUID_INSECURE = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
+    private static final UUID MY_UUID_INSECURE = UUID.fromString("8ce255c0-200a-11e0-ac64-0800200c9a66");//Universal HC_05 modual UUID
 
     private AcceptThread sInsicureAcceptThread;
     private ConnectThread sConnectThread;
@@ -28,9 +28,6 @@ public class BTConnectionService {
     private final BluetoothAdapter sBlueAdapter;
     Context sContext;
 
-    //check if conected method
-
-    // Default Constructor
     public BTConnectionService(Context context)
     {
         sContext = context;
@@ -83,9 +80,8 @@ public class BTConnectionService {
 
     }
 
-    private void connected(BluetoothSocket sSocket, BluetoothDevice ssDevice)
+    private void connected(BluetoothSocket sSocket, BluetoothDevice sDevice)
     {
-
         sConnectedThread = new ConnectedThread(sSocket);
         sConnectThread.start();
 
@@ -93,6 +89,8 @@ public class BTConnectionService {
     }
     public  void  write(byte[] out)
     {
+        ConnectedThread tmp;
+
         sConnectedThread.write(out);
     }
 
@@ -129,10 +127,10 @@ public class BTConnectionService {
 
                 } catch (IOException e) {
 
-                    e.printStackTrace();
+                    //e.printStackTrace();
                 }
 
-                ioException.printStackTrace();
+                //ioException.printStackTrace();
             }
             connected(scSocket,sDevice);
         }
@@ -164,11 +162,14 @@ public class BTConnectionService {
             sInsicureAcceptThread.start();
 
         }
+
+
     }
     public void startClient(BluetoothDevice _device, UUID _UUID)
     {
         sProgressDialog = sProgressDialog.show(sContext,"Connecting","Please Wait", true);
-        sConnectThread.run();
+        sConnectThread = new ConnectThread(_device,_UUID);
+        sConnectThread.start();
     }
     private class ConnectedThread extends Thread
     {
@@ -177,9 +178,9 @@ public class BTConnectionService {
         private final OutputStream _OutStream;
 
 
-        private ConnectedThread(BluetoothSocket sccSocket)
+        private ConnectedThread(BluetoothSocket scxSocket)
         {
-            this.sccSocket = sccSocket;
+            sccSocket = scxSocket;
             InputStream tmpInStream = null;
             OutputStream tmpOutStream = null;
             sProgressDialog.dismiss();
@@ -212,16 +213,11 @@ public class BTConnectionService {
         }
         public void write(byte[] bytes)
         {
-            startClient(sDevice,MY_UUID_INSECURE);
-            if(_OutStream == null){}
-
-                try {
-                    _OutStream.write(bytes);
-                } catch (IOException ioException) {
-                    Log.d(TAG,"OutStream Failed"+ ioException.getMessage());
-                }
-
-
+            try {
+                _OutStream.write(bytes);
+            } catch (IOException ioException) {
+                Log.d(TAG,"OutStream Failed "+ioException.getMessage());
+            }
         }
 
 
@@ -240,23 +236,5 @@ public class BTConnectionService {
 
 
     }
-    public void passDevice(BluetoothDevice _device, UUID _UUID)
-    {
-
-        sConnectThread = new ConnectThread(_device,_UUID);
-
-    }
-    public synchronized boolean isConnected()
-    {
-        if (sBlueAdapter != null)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
-    }
-
 
 }

@@ -19,6 +19,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
@@ -111,6 +112,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         NewDevices.setOnItemClickListener(BlueToothActivity.this);
     }
 
+
     public void BlueDiscoveryButton(View view) {
         Log.d(TAG, "Discovery: Looking for devices.");
 
@@ -141,6 +143,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
      * Android must chek bluetoothe permisions programmatically.
      *
      */
+
     private void checkBTPerm() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
         {
@@ -158,6 +161,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
 
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //you always cancel discover to insure it dosent eat up memory
@@ -167,9 +171,9 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         String dName = bDeviceList.get(position).getName();
         String dAddress = bDeviceList.get(position).getAddress();
         //this check is to make suer its obove API is 19 or > as its required for creatBond to work
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN_MR2);
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT);
         {
-            Log.d(TAG,dName+" Pairing");
+            Log.d(TAG,dName+" "+dAddress+"pairing");
             bDeviceList.get(position).createBond();
         }
         Log.d(TAG,dName+" Paired");
