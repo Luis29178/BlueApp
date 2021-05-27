@@ -2,19 +2,13 @@ package com.example.theblueapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,13 +16,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
-
-import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.UUID;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -64,8 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
 
     private BluetoothDevice mSelectedDevice;
+    private BTConnectionService mConnectionService;
+    private static final UUID MY_UUID_INSECURE = UUID.fromString("94f39d29-7d6d-437d-973b-fba39e49d4ee");
 
     int[] RGBval = new int[3];
+    boolean counter = true;
 
 
 
@@ -73,7 +67,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(mConnectionService == null)
+        {
+            mConnectionService = new BTConnectionService(this);
+            counter = false;
+        }
+
+
+
         setContentView(R.layout.activity_main);
+
         try
         {
             BluetoothDevice mDeviceb = getIntent().getExtras().getParcelable("ADDED_DEVICE");
@@ -92,9 +96,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         mSelectedDevice = mDeviceList.get(position);
+
+
+
                     }
                 });
         }
+
+
 
 
 
@@ -180,7 +189,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //endregion
 
 
+
     }
+
+
+
+    public void PassDevice()
+    {
+        ConnectDevice(mSelectedDevice,MY_UUID_INSECURE);
+    }
+    public void ConnectDevice(BluetoothDevice _Device, UUID _UUID)
+    {
+        mConnectionService.passDevice(_Device,_UUID);
+
+    }
+
     public void openColorPicker()
     {
         AmbilWarnaDialog colorWheel = new AmbilWarnaDialog(this, SelectedColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
@@ -192,7 +215,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 SelectedColor = color;
-                RGBconvertMethod(SelectedColor);
+                ByteBuffer buffer = ByteBuffer.allocate(4);
+                buffer.putInt(color);
+                byte[] RGBbytes = buffer.array();
+
+
+                PassDevice();
+
+
+                mConnectionService.write(RGBbytes);
+
 
 
             }

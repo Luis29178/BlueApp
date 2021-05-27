@@ -72,6 +72,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
                 if (pDevice.getBondState() == BluetoothDevice.BOND_BONDED)
                 {
                     Log.d(TAG,"pBrodcastReciverBond: BONDED");
+
                 }
                 if (pDevice.getBondState() == BluetoothDevice.BOND_BONDING)
                 {
