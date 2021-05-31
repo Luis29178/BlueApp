@@ -1,20 +1,19 @@
 package com.example.theblueapp;
 
-import androidx.annotation.RequiresApi;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.graphics.Color;
-import android.os.Bundle;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -22,15 +21,19 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.core.content.ContextCompat;
 
 
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Set;
+import java.util.Date;
 import java.util.UUID;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private  final String TAG = "MainActivity" ;
     private ImageButton mBlueButton;
+
+
+    byte[] bytes;
+
 
 
     RelativeLayout mlayout;
@@ -64,15 +71,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mPresetColor4;
     private Button mPresetColor5;
     //endregion
-    private ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
+    private final ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
 
     private BluetoothDevice mSelectedDevice;
     private static final UUID MY_UUID_INSECURE = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private BTConnectionService mConectionservice = new BTConnectionService(this);
+    private final BTConnectionService mConectionservice = new BTConnectionService(this);
 
 
     int[] RGBval = new int[3];
-
+    int onoff ;
+    
 
 
 
@@ -80,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        onoff = 0;
+
 
 
 
@@ -168,7 +178,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         OnOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (onoff == 1)
+                {
+                    onoff = 0;
+                }
+                else
+                {
+                    onoff = 1;
+                }
+                SendBTMessage(onoff,4);
+
                 DisableOpacityBar(mOpasityBar,mOseekbar,mOpasitytext);
+
             }
         });
         //endregion
@@ -221,34 +242,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 SelectedColor = color;
                 RGBconvertMethod(SelectedColor);
-                ByteBuffer Buffer = ByteBuffer.allocate(4);
-                Buffer.putInt(1);
-                byte[] bytes = Buffer.array();
-                BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
-                BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
-                BluetoothSocket mSocket = null;
-                int counter = 0;
-                do {
-                    try {
-                        mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
-                        mSocket.connect();
-                    } catch (IOException ioException) {
-                        ioException.printStackTrace();
-                    }
-                }while (!mSocket.isConnected());
 
-                try {
-                    OutputStream OutPut =mSocket.getOutputStream();
-                    OutPut.write(bytes);
+                SendBTMessage(SelectedColor,4);
 
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                try {
-                    mSocket.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
+
 
 
                 //mConectionservice.write(bytes);
@@ -256,6 +253,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         colorWheel.show();
+    }
+    public void SendBTMessage(int _message, int _buffSize)
+    {
+        ByteBuffer Buffer = ByteBuffer.allocate(_buffSize);
+        Buffer.putInt(_message);
+        bytes = Buffer.array();
+
+        BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
+        BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
+        BluetoothSocket mSocket = null;
+
+
+
+
+        do {
+            try {
+                mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
+                mSocket.connect();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }while (!mSocket.isConnected());
+
+
+
+        try {
+
+            OutputStream OutPut =mSocket.getOutputStream();
+            OutPut.write(bytes);
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+
+        InputStream inPut = null;
+        try {
+            inPut = mSocket.getInputStream();
+            DataInputStream message = new DataInputStream(inPut);
+            Log.d(TAG, "Arduino responce: "+ message.toString());
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+        try {
+            mSocket.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
     }
     public void DisableOpacityBar(ProgressBar _Pbar, SeekBar _sbar, TextView _Opasitytext)
     {
