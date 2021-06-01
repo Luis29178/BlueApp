@@ -99,7 +99,9 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="158dp"
         android:layout_marginRight="158dp"
-        app:backgroundTint="#00FF00" />
+        android:backgroundTint="#00FF00"
+        android:background="#00FF00"
+        />
 
     <Button
         android:id="@+id/ColorPreset3"
@@ -111,7 +113,9 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="112dp"
         android:layout_marginRight="112dp"
-        app:backgroundTint="#0000FF" />
+        android:backgroundTint="#0000FF"
+        android:background="#0000FF"
+        />
 
     <Button
         android:id="@+id/ColorPreset4"
@@ -122,7 +126,10 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="42dp"
         android:layout_marginEnd="66dp"
-        android:layout_marginRight="66dp" />
+        android:layout_marginRight="66dp"
+        android:backgroundTint="#673AB7"
+        android:background="#673AB7"
+        />
 
     <Button
         android:id="@+id/ColorPreset5"
@@ -134,7 +141,8 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        app:backgroundTint="#FFEB3B" />
+        android:backgroundTint="#FFEB3B"
+        android:background="#FFEB3B"/>
 
     <Button
         android:id="@+id/ColorPreset1"
@@ -146,7 +154,9 @@
         android:layout_marginTop="42dp"
         android:layout_marginEnd="204dp"
         android:layout_marginRight="204dp"
-        app:backgroundTint="#FF0000" />
+        android:backgroundTint="#FF0000"
+        android:background="#FF0000"
+        />
 
     <ImageButton
         android:id="@+id/On_Off"

@@ -8,6 +8,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 
+import android.graphics.Color;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -28,12 +30,12 @@ import androidx.core.content.ContextCompat;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+
 import java.io.OutputStream;
-import java.io.Reader;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.UUID;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -198,10 +200,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //region ColorPreset Buttons
         mPresetColor1 = (Button) findViewById(R.id.ColorPreset1);
+        mPresetColor1.setBackground(new PaintDrawable(Color.RED));
         mPresetColor2 = (Button) findViewById(R.id.ColorPreset2);
+        mPresetColor2.setBackground(new PaintDrawable(Color.GREEN));
         mPresetColor3 = (Button) findViewById(R.id.ColorPreset3);
+        mPresetColor3.setBackground(new PaintDrawable(Color.BLUE));
         mPresetColor4 = (Button) findViewById(R.id.ColorPreset4);
+        mPresetColor4.setBackground(new PaintDrawable(Color.MAGENTA));
         mPresetColor5 = (Button) findViewById(R.id.ColorPreset5);
+        mPresetColor5.setBackground(new PaintDrawable(Color.YELLOW));
 
 
         mPresetColor1.setOnClickListener(this);
@@ -242,7 +249,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 SelectedColor = color;
                 RGBconvertMethod(SelectedColor);
-
                 SendBTMessage(SelectedColor,4);
 
 
@@ -287,6 +293,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ioException.printStackTrace();
         }
 
+        try {
+            mSocket.close();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        }
+
+    }
+
+    public void ReciveBTMessage(int _messageContainer)
+    {
+
+        BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
+        BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
+        BluetoothSocket mSocket = null;
+
+
+
+
+        do {
+            try {
+                mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
+                mSocket.connect();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }while (!mSocket.isConnected());
+
+
 
         InputStream inPut = null;
         try {
@@ -297,11 +331,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ioException.printStackTrace();
         }
 
+
         try {
             mSocket.close();
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }
+
 
     }
     public void DisableOpacityBar(ProgressBar _Pbar, SeekBar _sbar, TextView _Opasitytext)
@@ -332,8 +368,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override//this method will be implemented as ButtonDesierd.OnClickListener(this) needs to be revied on what color v.getSolidColor() pulls
-    public void onClick(View v) {
-        SelectedColor = v.getSolidColor();
-        mlayout.setBackgroundColor(SelectedColor);
+    public void onClick(View v) {//has to be made for each button individualy
+
+        PaintDrawable ColorDrawable = (PaintDrawable) v.getBackground();
+        SelectedColor = ColorDrawable.getPaint().getColor();
+        SendBTMessage(SelectedColor,4);
     }
 }
