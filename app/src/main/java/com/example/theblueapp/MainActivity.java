@@ -180,15 +180,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         OnOffButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (onoff == 1)
                 {
+                    byte[] temp = {(byte) 255 , (byte) 255, (byte) 255};
+                    bytes = temp ;
                     onoff = 0;
                 }
                 else
                 {
+                    byte[] temp = { (byte)0 , (byte)0, (byte)0};
+                    bytes = temp;
                     onoff = 1;
                 }
-                SendBTMessage(onoff,4);
+                SendBTMessage(bytes);
+
+
 
                 DisableOpacityBar(mOpasityBar,mOseekbar,mOpasitytext);
 
@@ -220,6 +227,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     }
+
+
     public void startBTServices()
     {
 
@@ -249,7 +258,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 SelectedColor = color;
                 RGBconvertMethod(SelectedColor);
-                SendBTMessage(SelectedColor,4);
+
+                SendBTMessage(bytes);
 
 
 
@@ -260,11 +270,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
         colorWheel.show();
     }
-    public void SendBTMessage(int _message, int _buffSize)
+    public void SendBTMessage(byte[] _message)
     {
-        ByteBuffer Buffer = ByteBuffer.allocate(_buffSize);
-        Buffer.putInt(_message);
-        bytes = Buffer.array();
+
 
         BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
         BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
@@ -287,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
 
             OutputStream OutPut =mSocket.getOutputStream();
-            OutPut.write(bytes);
+            OutPut.write(_message);
 
         } catch (IOException ioException) {
             ioException.printStackTrace();
@@ -365,13 +373,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RGBval[1] = (_Color & 0xFF00) >> 8;
         RGBval[2] = (_Color & 0xFF);
 
+
     }
+
 
     @Override//this method will be implemented as ButtonDesierd.OnClickListener(this) needs to be revied on what color v.getSolidColor() pulls
     public void onClick(View v) {//has to be made for each button individualy
 
         PaintDrawable ColorDrawable = (PaintDrawable) v.getBackground();
         SelectedColor = ColorDrawable.getPaint().getColor();
-        SendBTMessage(SelectedColor,4);
+        RGBconvertMethod(SelectedColor);
+        byte[] temp = { 0, 0, 0};
+        for (int i = 0; i < RGBval.length;i++)
+        {
+            temp[i] = (byte) RGBval[i];
+        }
+        bytes = temp;
+        SendBTMessage(bytes);
     }
 }
