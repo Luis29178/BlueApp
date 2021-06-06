@@ -113,6 +113,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void BlueDiscoveryButton(View view) {
         Log.d(TAG, "Discovery: Looking for devices.");
 
@@ -144,6 +145,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
      *
      */
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void checkBTPerm() {
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
         {
@@ -162,6 +164,7 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //you always cancel discover to insure it dosent eat up memory

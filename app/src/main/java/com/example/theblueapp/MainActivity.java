@@ -33,6 +33,7 @@ import java.io.InputStream;
 
 import java.io.OutputStream;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
@@ -181,19 +182,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View v) {
 
+
                 if (onoff == 1)
                 {
                     byte[] temp = {(byte) 255 , (byte) 255, (byte) 255};
+                    SelectedColor = 0;
+                    String test = Integer.toHexString(SelectedColor);
                     bytes = temp ;
                     onoff = 0;
+                    SendBTMessage(bytes);
                 }
                 else
                 {
                     byte[] temp = { (byte)0 , (byte)0, (byte)0};
+                    SelectedColor = 0;
+                    String test = Integer.toHexString(SelectedColor);
                     bytes = temp;
                     onoff = 1;
+                    SendBTMessage(bytes);
                 }
-                SendBTMessage(bytes);
+
 
 
 
@@ -229,6 +237,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    class BTSendThread implements Runnable{
+        byte[] _message;
+
+        BTSendThread(byte[] message){
+            _message = message;
+
+        }
+
+        @Override
+        public void run() {
+            sendbtmethod(_message);
+        }
+    }
+
+
     public void startBTServices()
     {
 
@@ -258,6 +281,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 SelectedColor = color;
                 RGBconvertMethod(SelectedColor);
+                ByteBuffer buffer = ByteBuffer.allocate(16);
+                buffer.putInt(SelectedColor);
+
+
+                for (int i =0; i< RGBval.length;i++)
+                {
+                    buffer.putInt(RGBval[i]);
+                }
+                byte[] temp = buffer.array();
+                bytes = temp;
 
                 SendBTMessage(bytes);
 
@@ -272,41 +305,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void SendBTMessage(byte[] _message)
     {
+        BTSendThread btrunable = new BTSendThread(_message);
+        new Thread(btrunable).start();
+
+    }
+    private void sendbtmethod(byte[] _message)
+    {
+        if(mSelectedDevice != null) {
+            BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
+            BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
+            BluetoothSocket mSocket = null;
 
 
-        BluetoothAdapter aAdapt = BluetoothAdapter.getDefaultAdapter();
-        BluetoothDevice arduino = aAdapt.getRemoteDevice(mSelectedDevice.getAddress());
-        BluetoothSocket mSocket = null;
+            do {
+                try {
+                    mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
+                    mSocket.connect();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+            } while (!mSocket.isConnected());
 
 
-
-
-        do {
             try {
-                mSocket = arduino.createInsecureRfcommSocketToServiceRecord(MY_UUID_INSECURE);
-                mSocket.connect();
+
+                OutputStream OutPut = mSocket.getOutputStream();
+
+
+                OutPut.write(_message);
+
+
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-        }while (!mSocket.isConnected());
 
-
-
-        try {
-
-            OutputStream OutPut =mSocket.getOutputStream();
-            OutPut.write(_message);
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+            try {
+                mSocket.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
-
-        try {
-            mSocket.close();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-
     }
 
     public void ReciveBTMessage(int _messageContainer)
@@ -383,12 +421,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         PaintDrawable ColorDrawable = (PaintDrawable) v.getBackground();
         SelectedColor = ColorDrawable.getPaint().getColor();
         RGBconvertMethod(SelectedColor);
-        byte[] temp = { 0, 0, 0};
-        for (int i = 0; i < RGBval.length;i++)
-        {
-            temp[i] = (byte) RGBval[i];
-        }
+        String tests = Integer.toHexString(SelectedColor);
+
+        byte[] temp = tests.getBytes();
         bytes = temp;
-        SendBTMessage(bytes);
+        //SendBTMessage(bytes);
+
+
     }
 }
