@@ -240,37 +240,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Color_Dialog Colorwheezl = new Color_Dialog();
             Colorwheezl.show(getSupportFragmentManager(),"ColorWheel");
 
-        /*AmbilWarnaDialog colorWheel = new AmbilWarnaDialog(this, SelectedColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
-            @Override
-            public void onCancel(AmbilWarnaDialog dialog) {
-
-            }
-
-            @Override
-            public void onOk(AmbilWarnaDialog dialog, int color) {
-                SelectedColor = color;
-                RGBconvertMethod(SelectedColor);
-                ByteBuffer buffer = ByteBuffer.allocate(16);
-                buffer.putInt(SelectedColor);
-
-
-                for (int i =0; i< RGBval.length;i++)
-                {
-                    buffer.putInt(RGBval[i]);
-                }
-                byte[] temp = buffer.array();
-                bytes = temp;
-
-                SendBTMessage(bytes);
-
-
-
-
-                //mConectionservice.write(bytes);
-
-            }
-        });
-        colorWheel.show();*/
     }
     //endregion
 

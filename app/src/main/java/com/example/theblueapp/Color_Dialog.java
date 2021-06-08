@@ -54,6 +54,7 @@ public class Color_Dialog extends AppCompatDialogFragment {
         });
         //endregion
 
+        //region Variable Initialization
         Color_wheel = view.findViewById(R.id.ColorWheelHUE);
         Red = view.findViewById(R.id.RedBar);
         RedVal = view.findViewById(R.id.RedVal);
@@ -64,6 +65,12 @@ public class Color_Dialog extends AppCompatDialogFragment {
         Red = view.findViewById(R.id.BlueBar);
         RedVal = view.findViewById(R.id.BlueVal);
         _Red = view.findViewById(R.id.BluePro);
-        return super.onCreateDialog(savedInstanceState);
+        //endregion
+
+
+
+
+        return builder.create();
+
     }
 }
