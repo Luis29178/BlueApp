@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
 
+
     //region On CreateMethod @Override
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,26 +160,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onClick(View v) {
 
 
+                byte[] temp;
                 if (onoff == 1)
                 {
-                    byte[] temp = {(byte) 255 , (byte) 255, (byte) 255};
+                    temp = new byte[]{(byte) 255, (byte) 255, (byte) 255};
                     SelectedColor = 0;
                     String test = Integer.toHexString(SelectedColor);
                     bytes = temp ;
                     onoff = 0;
-                    SendBTMessage(bytes);
                 }
                 else
                 {
-                    byte[] temp = { (byte)0 , (byte)0, (byte)0};
+                    temp = new byte[]{(byte) 0, (byte) 0, (byte) 0};
                     SelectedColor = Color.WHITE;
                     String test = Integer.toHexString(SelectedColor);
                     bytes = temp;
                     onoff = 1;
-                    SendBTMessage(bytes);
                 }
-
-
+                SendBTMessage(bytes);
 
 
                 DisableOpacityBar(mOpasityBar,mOseekbar,mOpasitytext);
@@ -212,6 +211,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
 
+
     //region BTSendRunnable Class
     class BTSendThread implements Runnable
     {
@@ -236,7 +236,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //region OpenColorPicker
     public void openColorPicker()
     {
-        AmbilWarnaDialog colorWheel = new AmbilWarnaDialog(this, SelectedColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+
+            Color_Dialog Colorwheezl = new Color_Dialog();
+            Colorwheezl.show(getSupportFragmentManager(),"ColorWheel");
+
+        /*AmbilWarnaDialog colorWheel = new AmbilWarnaDialog(this, SelectedColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
 
@@ -266,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        colorWheel.show();
+        colorWheel.show();*/
     }
     //endregion
 
@@ -304,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 OutputStream OutPut = mSocket.getOutputStream();
 
 
-                OutPut.write(SelectedColor);
+                OutPut.write(_message);
 
 
             } catch (IOException ioException) {
@@ -402,7 +406,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     //endregion
-
 
     //region Preset Button color get/ send Method
     @Override
