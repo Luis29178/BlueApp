@@ -4,4 +4,7 @@
     <string name="colorwheel">ColorWheel</string>
     <string name="onoff">ONOFF</string>
     <string name="_0">0</string>
+    <string name="_RedVal">0</string>
+    <string name="_GreenVal">0</string>
+    <string name="_BlueVal">0</string>
 </resources>

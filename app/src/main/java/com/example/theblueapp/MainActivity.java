@@ -30,12 +30,13 @@ import java.util.UUID;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, Color_Dialog.Color_DialogListener {
     private  final String TAG = "MainActivity" ;
     private static final UUID MY_UUID_INSECURE = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     //region Main Assets
     private int SelectedColor;
+    private String stringSelctedColor;
     int onoff;
     byte[] bytes;
     int[] RGBval = new int[3];
@@ -173,9 +174,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 {
                     temp = new byte[]{(byte) 0, (byte) 0, (byte) 0};
                     SelectedColor = Color.WHITE;
-                    String test = Integer.toHexString(SelectedColor);
-                    bytes = temp;
-                    onoff = 1;
+                    String test ="1"; //Integer.toHexString(SelectedColor);
+                    bytes = test.getBytes();
                 }
                 SendBTMessage(bytes);
 
@@ -210,7 +210,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //endregion
 
-
+    //region PassColorFromColor wheel
+    @Override
+    public void PassColor(String _Hex) {
+        stringSelctedColor = _Hex;
+        byte[] temp = _Hex.getBytes();
+        bytes = temp;
+        SendBTMessage(bytes);
+    }
+    //endregion
 
     //region BTSendRunnable Class
     class BTSendThread implements Runnable
