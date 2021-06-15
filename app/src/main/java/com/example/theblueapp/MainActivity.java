@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private SeekBar mOseekbar;// The slider Barr for the opacity\brightness
 
+    private ImageButton mListActivitybtn;
+
     private ImageButton OnOffButton;//Power button in the center
 
     private Button ColorWbutton;// Button that will call color wheel
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
     //endregion
 
+    private Group_Page GroupListactivity = new Group_Page();
 
 
     //region On CreateMethod @Override
@@ -204,6 +207,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mPresetColor3.setOnClickListener(this);
         mPresetColor4.setOnClickListener(this);
         mPresetColor5.setOnClickListener(this);
+        //endregion
+
+        //region List Activity Button
+        mListActivitybtn = (ImageButton) findViewById(R.id.ListActivitybtn);
+        mListActivitybtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OpenListActivity();
+            }
+        });
         //endregion
 
 
@@ -369,6 +382,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         Intent mopenBlue = new Intent(MainActivity.this, BlueToothActivity.class);
         startActivity(mopenBlue);
+
+    }
+    //endregion
+
+    //region Open List Activity
+    public void OpenListActivity()
+    {
+        Intent mOpenListact = new Intent(MainActivity.this, Group_Page.class);
+        startActivity(mOpenListact);
 
     }
     //endregion

@@ -53,8 +53,8 @@
         android:max="100"
         android:progress="1" />
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <ImageButton
+        android:id="@+id/ListActivitybtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -70,7 +70,6 @@
         android:layout_marginRight="268dp"
         android:layout_marginBottom="573dp"
         android:adjustViewBounds="false"
-        android:background="#FF0000"
         android:baselineAlignBottom="false"
         android:contentDescription="@string/selectedgroup"
         android:scaleType="centerCrop"
@@ -85,8 +84,8 @@
         android:layout_marginStart="-225dp"
         android:layout_marginLeft="-225dp"
         android:layout_marginTop="17dp"
-        android:layout_toEndOf="@+id/imageView2"
-        android:layout_toRightOf="@+id/imageView2"
+        android:layout_toEndOf="@+id/ListActivitybtn"
+        android:layout_toRightOf="@+id/ListActivitybtn"
         android:text="@string/colorwheel" />
 
     <Button
