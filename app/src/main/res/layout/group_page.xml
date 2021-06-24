@@ -31,7 +31,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
         android:visibility="visible"
-        app:srcCompat="@drawable/ambilwarna_alphacheckered"
+        app:srcCompat="?android:attr/galleryItemBackground"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="32dp" />
 
