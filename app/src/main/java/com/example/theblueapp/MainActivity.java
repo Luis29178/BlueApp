@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final ArrayList<BluetoothDevice> mDeviceList = new ArrayList<>();
     //endregion
 
+
     private Group_Page GroupListactivity = new Group_Page();
 
 
@@ -422,4 +423,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     //endregion
+
+    public void mOpenBluetoothActivity(View view)
+    {
+        Intent mopenMain = new Intent(MainActivity.this, BlueToothActivity.class);
+        startActivity(mopenMain);
+
+    }
+    public  void  mOpenPresetActivity(View view)
+    {
+        Intent mOpenPresets = new Intent(MainActivity.this, PresetActivity.class);
+        startActivity(mOpenPresets);
+    }
+
 }

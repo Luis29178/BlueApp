@@ -1,31 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <Button
-        android:text="On/Off"
+        android:id="@+id/BlueDicButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:id="@+id/BlueDicButton"
-        />
+        android:text="On/Off" />
 
     <Button
+        android:id="@+id/BlueFindDevButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Discover"
-        android:id="@+id/BlueFindDevButton"
-        android:onClick="BlueDiscoveryButton"
-        />
+        android:onClick="bBlueDiscoveryButton"
+        android:text="Discover" />
 
     <ListView
         android:id="@+id/BlueNewDevices"
         android:layout_width="match_parent"
         android:layout_height="683dp"
         android:layout_below="@id/BlueFindDevButton"
+        android:layout_alignBottom="@id/FooterBar"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="1dp" />
+
+    <ImageView
+        android:id="@+id/FooterBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp" />
+        android:layout_marginBottom="-5dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/galaxy" />
+
+    <Button
+        android:id="@+id/fbHome"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginBottom="-4dp"
+        android:background="@drawable/footerbtn"
+        android:onClick="bOpenHomeActivity"
+/>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/fbHome"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="65dp"
+        android:background="@drawable/ic_home" />
+
+    <Button
+        android:id="@+id/fbPresets"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-4dp"
+        android:background="@drawable/footerbtn"
+        android:onClick="bOpenPresetActivity"
+         />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/fbPresets"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="65dp"
+        android:background="@drawable/ic_presets"/>
+
 
 </RelativeLayout>

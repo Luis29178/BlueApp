@@ -44,7 +44,13 @@ public class Group_Page extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_page);
-        
+        Button1 = (ImageButton) findViewById(R.id.List1);
+        Button2 = (ImageButton) findViewById(R.id.List2);
+        Button3 = (ImageButton) findViewById(R.id.List3);
+        Button4 = (ImageButton) findViewById(R.id.List4);
+        Button5 = (ImageButton) findViewById(R.id.List5);
+        Button6 = (ImageButton) findViewById(R.id.List6);
+        AddList = (Button) findViewById(R.id.AddListButton);
 
 /*
         Button1.setOnLongClickListener(new View.OnLongClickListener() {

@@ -14,6 +14,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -28,6 +29,12 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
     private static final String TAG = "BlueToothActivity";
 
     private BluetoothAdapter bBlueAdapter;
+
+    //region Footer
+    private Button fHome;
+    private Button faddDevice;
+    private  Button fPresets;
+    //endregion
 
     private ArrayList<BluetoothDevice> bDeviceList;
     private Device_Adapter bDevAdapter;
@@ -103,6 +110,9 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
     @Override
     public void onCreate( Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.bluetooth_discov_layout);
         NewDevices = (ListView) findViewById(R.id.BlueNewDevices);
         bDeviceList = new ArrayList<>();
@@ -110,11 +120,13 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
         IntentFilter pBondFilter = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(pBrodcastReciverBond, pBondFilter);
         NewDevices.setOnItemClickListener(BlueToothActivity.this);
+
+
     }
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void BlueDiscoveryButton(View view) {
+    public void bBlueDiscoveryButton(View view) {
         Log.d(TAG, "Discovery: Looking for devices.");
 
         if (bBlueAdapter.isDiscovering())
@@ -187,6 +199,28 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
 
 
     }
+
+
+
+    //region Open Activitys
+    public void bOpenBluetoothActivity(View view)
+    {
+        // stays empty since in main activity
+
+    }
+    public  void  bOpenPresetActivity(View view)
+    {
+        Intent mOpenPresets = new Intent(BlueToothActivity.this, PresetActivity.class);
+        startActivity(mOpenPresets);
+    }
+    public void bOpenHomeActivity(View view)
+    {
+        Intent mopenMain = new Intent(BlueToothActivity.this, MainActivity.class);
+        startActivity(mopenMain);
+
+
+    }
+    //endregion
 }
 
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageButton
+        android:id="@+id/Rainbow"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="57dp"
+        android:background="@drawable/rainbow" />
+
+    <ImageButton
+        android:id="@+id/Natural"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="156dp"
+        android:layout_marginLeft="156dp"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/ic_natural" />
+
+    <ImageButton
+        android:id="@+id/Rave"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="270dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/ic_baseline_flip_to_front_24" />
+
+    <ImageView
+        android:id="@+id/FooterBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-4dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/galaxy" />
+
+    <Button
+        android:id="@+id/fcHome"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="0dp"
+        android:background="@drawable/footerbtn"
+        android:onClick="OpenHomeActivity" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/fcHome"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="65dp"
+        android:background="@drawable/ic_home" />
+
+    <Button
+        android:id="@+id/fcPresets"
+        android:layout_width="175dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/footerbtn"
+        android:onClick="OpenPresetActivity" />
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/fcPresets"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="65dp"
+        android:background="@drawable/ic_presets"/>
+
+    <Button
+        android:id="@+id/fcAddBtn"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_baseline_add"
+        android:onClick="OpenBluetoothActivity" />
+
+</RelativeLayout>
