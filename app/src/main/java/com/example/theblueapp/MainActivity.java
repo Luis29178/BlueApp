@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
     //region BTSendRunnable Class
-    class BTSendThread implements Runnable
+    private class BTSendThread implements Runnable
     {
         byte[] _message;
 
@@ -266,7 +266,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //endregion
 
     //region Send Mehtods
-    public void SendBTMessage(byte[] _message)
+    private void SendBTMessage(byte[] _message)
     {
         BTSendThread btrunable = new BTSendThread(_message);
         new Thread(btrunable).start();
@@ -382,6 +382,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void OpenBluetoothActivity()
     {
         Intent mopenBlue = new Intent(MainActivity.this, BlueToothActivity.class);
+        mopenBlue.putExtra("currDevice", mSelectedDevice);
         startActivity(mopenBlue);
 
     }
@@ -391,19 +392,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void OpenListActivity()
     {
         Intent mOpenListact = new Intent(MainActivity.this, Group_Page.class);
+        mOpenListact.putExtra("currDevice", mSelectedDevice);
         startActivity(mOpenListact);
 
     }
     //endregion
 
     //region RGBMethod
-    public void RGBconvertMethod(int _Color)
+    public String RGBconvertMethod(int color)
     {
-        RGBval[0] = (_Color & 0xFF0000) >> 16;
-        RGBval[1] = (_Color & 0xFF00) >> 8;
-        RGBval[2] = (_Color & 0xFF);
+        int r = Color.red(color);
+        int g = Color.green(color);
+        int b = Color.blue(color);
 
-
+        String message = '<'+ String.valueOf(r) +'+'+ String.valueOf(g) +'-'+ String.valueOf(b)+"*S"+'>';
+        return message;
     }
     //endregion
 
@@ -413,8 +416,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         PaintDrawable ColorDrawable = (PaintDrawable) v.getBackground();
         SelectedColor = ColorDrawable.getPaint().getColor();
-        RGBconvertMethod(SelectedColor);
-        String tests = Integer.toHexString(SelectedColor);
+
+        String tests = RGBconvertMethod(SelectedColor);
 
         byte[] temp = tests.getBytes();
         bytes = temp;

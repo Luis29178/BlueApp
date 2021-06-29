@@ -211,11 +211,15 @@ public class BlueToothActivity extends AppCompatActivity implements AdapterView.
     public  void  bOpenPresetActivity(View view)
     {
         Intent mOpenPresets = new Intent(BlueToothActivity.this, PresetActivity.class);
+        BluetoothDevice temp = getIntent().getExtras().getParcelable("currDevice");
+        mOpenPresets.putExtra("currDevice",temp);
         startActivity(mOpenPresets);
     }
     public void bOpenHomeActivity(View view)
     {
         Intent mopenMain = new Intent(BlueToothActivity.this, MainActivity.class);
+        BluetoothDevice temp = getIntent().getExtras().getParcelable("currDevice");
+        mopenMain.putExtra("currDevice",temp);
         startActivity(mopenMain);
 
 

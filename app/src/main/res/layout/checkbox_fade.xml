@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PresetActivity">
+
+    <CheckBox
+        android:id="@+id/RG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fadedialogtital"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="13dp" />
+
+    <CheckBox
+        android:id="@+id/RB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RG"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="12dp" />
+
+    <CheckBox
+        android:id="@+id/GB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/RB"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:id="@+id/fadedialogtital"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="36dp"
+        android:text="Color Options" />
+
+    <TextView
+
+        android:id="@+id/RGtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fadedialogtital"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@+id/RG"
+        android:layout_toRightOf="@+id/RG"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/RGtxt"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/RB"
+        android:layout_toRightOf="@+id/RB"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="26dp"
+        android:layout_toEndOf="@+id/GB"
+        android:layout_toRightOf="@+id/GB"
+        android:text="TextView" />
+
+    <Button
+        android:id="@+id/pOkbtn"
+        android:textSize="8dp"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/textView4"
+        android:layout_marginStart="-37dp"
+        android:layout_marginLeft="-37dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:layout_toRightOf="@+id/textView4"
+        android:text="OK" />
+
+    <Button
+        android:id="@+id/pCancelbtn"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/pOkbtn"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/pOkbtn"
+        android:layout_toRightOf="@+id/pOkbtn"
+        android:text="Button"
+        android:textSize="8dp" />
+
+
+</RelativeLayout>

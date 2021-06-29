@@ -12,10 +12,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="57dp"
-        android:background="@drawable/rainbow" />
+        android:layout_marginStart="167dp"
+        android:layout_marginLeft="167dp"
+        android:layout_marginTop="61dp"
+        android:background="@drawable/rainbow"
+        android:onClick="RainbowMode"
+        />
 
     <ImageButton
         android:id="@+id/Natural"
@@ -24,10 +26,11 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="156dp"
-        android:layout_marginLeft="156dp"
-        android:layout_marginTop="55dp"
-        android:background="@drawable/ic_natural" />
+        android:layout_marginStart="59dp"
+        android:layout_marginLeft="59dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ic_natural"
+        android:onClick="StaticMode"/>
 
     <ImageButton
         android:id="@+id/Rave"
@@ -36,10 +39,12 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="270dp"
-        android:layout_marginLeft="270dp"
-        android:layout_marginTop="54dp"
-        android:background="@drawable/ic_baseline_flip_to_front_24" />
+        android:layout_marginStart="281dp"
+        android:layout_marginLeft="281dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ic_baseline_flip_to_front_24"
+        android:onClick="FladeMode"
+        />
 
     <ImageView
         android:id="@+id/FooterBar"
@@ -49,6 +54,7 @@
         android:layout_marginBottom="-4dp"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/galaxy" />
+
 
     <Button
         android:id="@+id/fcHome"

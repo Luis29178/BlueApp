@@ -120,7 +120,7 @@ public class Color_Dialog extends AppCompatDialogFragment {
                     _cGreen.setProgress(g);
                     _cBlue.setProgress(b);*/
 
-                    BTHEXcolor = '<'+ String.valueOf(r) +'+'+ String.valueOf(g) +'-'+ String.valueOf(b)+'>';
+                    BTHEXcolor = '<'+ String.valueOf(r) +'+'+ String.valueOf(g) +'-'+ String.valueOf(b)+"*S"+'>';
 
 
                 }
