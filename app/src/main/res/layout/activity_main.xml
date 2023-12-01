@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/Home"
+    tools:context=".MainActivity">
+    <TextView
+        android:id="@+id/TextViewOpasity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_0"
+        android:textSize="20sp"
+        android:layout_above="@+id/Opasitybar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        />
+    <ProgressBar
+        android:id="@+id/Opasitybar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/OpasitySeekBar"
+        android:layout_alignBottom="@+id/OpasitySeekBar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp" />
+
+    <SeekBar
+        android:id="@+id/OpasitySeekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="500dp"
+        android:max="100"
+        android:progress="1" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="268dp"
+        android:layout_marginRight="268dp"
+        android:layout_marginBottom="573dp"
+        android:adjustViewBounds="false"
+        android:background="#FF0000"
+        android:baselineAlignBottom="false"
+        android:contentDescription="@string/selectedgroup"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/temphouse"
+        tools:srcCompat="@drawable/temphouse" />
+
+    <Button
+        android:id="@+id/ColorWheelOpen"
+        android:layout_width="212dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ColorPreset3"
+        android:layout_marginStart="-225dp"
+        android:layout_marginLeft="-225dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView2"
+        android:text="@string/colorwheel" />
+
+    <Button
+        android:id="@+id/ColorPreset2"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="158dp"
+        android:layout_marginRight="158dp"
+        app:backgroundTint="#00FF00" />
+
+    <Button
+        android:id="@+id/ColorPreset3"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginRight="112dp"
+        app:backgroundTint="#0000FF" />
+
+    <Button
+        android:id="@+id/ColorPreset4"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="66dp"
+        android:layout_marginRight="66dp" />
+
+    <Button
+        android:id="@+id/ColorPreset5"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:backgroundTint="#FFEB3B" />
+
+    <Button
+        android:id="@+id/ColorPreset1"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="42dp"
+        android:layout_marginEnd="204dp"
+        android:layout_marginRight="204dp"
+        app:backgroundTint="#FF0000" />
+
+    <ImageButton
+        android:id="@+id/On_Off"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="182dp"
+        android:layout_marginRight="182dp"
+        android:layout_marginBottom="425dp"
+        app:srcCompat="@android:drawable/ic_lock_power_off" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/mBlueList"
+
+
+        />
+
+    <ImageButton
+        android:id="@+id/AddBlueDeviceButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/mBlueList"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="32dp"
+        android:rotation="-43"
+        android:src="@android:drawable/btn_dialog" />
+
+
+</RelativeLayout>
